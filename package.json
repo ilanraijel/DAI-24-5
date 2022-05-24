@@ -1,0 +1,19 @@
+{
+  "name": "personaje-api",
+  "version": "1.0.0",
+  "description": "TP 02 Personaje",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "msnodesqlv8": "^2.4.7",
+    "mssql": "^8.1.0"
+  }
+}

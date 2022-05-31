@@ -77,7 +77,8 @@ export class PersonajeService {
             .input('Edad',sql.VarChar, Personaje?.edad ?? '')
             .input('Peso',sql.VarChar, Personaje?.peso ?? '')
             .input('Historia',sql.VarChar, Personaje?.historia ?? '')
-            .query(`INSERT INTO ${Personajes}(Imagen, Nombre, Edad, Peso, Historia) VALUES (@Imagen, @Nombre, @Edad, @Peso, @Historia)`);
+            .input('Imagen',sql.VarChar, Personaje?.peliculaoserieasociada ?? '')
+            .query(`INSERT INTO ${Personajes}(Imagen, Nombre, Edad, Peso, Historia, Pelicula o serie asociada) VALUES (@Imagen, @Nombre, @Edad, @Peso, @Historia, @Pelicula o serie asociada)`);
 
         console.log(response)
 

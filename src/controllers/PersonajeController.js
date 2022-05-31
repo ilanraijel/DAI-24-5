@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { PersonajeService } from '../services/personajeService.js';
+import { PersonajeService } from '../services/PersonajeService.js';
 
 const router = Router();
 const personajeService = new PersonajeService();

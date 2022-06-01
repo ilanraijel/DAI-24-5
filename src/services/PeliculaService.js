@@ -2,11 +2,11 @@ import sql from 'mssql'
 import config from '../../db.js'
 import 'dotenv/config'
 
-const PersonajeTabla = process.env.DB_TABLA_PERSONAJES;
+const PeliculaTabla = process.env.DB_TABLA_PELICULAS;
 
-export class PersonajeService {
+export class PeliculaService {
 
-    getPersonaje = async (nombre, edad) => {
+    getPelicula = async (nombre, edad) => {
 
         console.log('This is a function on the service');
 
@@ -19,7 +19,7 @@ export class PersonajeService {
                 .input('Nombre',sql.VarChar, nombre)
                 .input('Edad',sql.VarChar, edad)
 
-            .query(`SELECT * from ${Personajes} where nombre = @nombre and edad = @edad`);
+            .query(`SELECT * from ${Peliculas} where nombre = @nombre and edad = @edad`);
 
         }else if(nombre && !edad){
 
@@ -27,7 +27,7 @@ export class PersonajeService {
 
                 .input('Nombre',sql.VarChar, nombre)
 
-            .query(`SELECT * from ${Personajes} where nombre = @nombre`);
+            .query(`SELECT * from ${Peliculas} where nombre = @nombre`);
 
         }else if(!nombre && edad){
 
@@ -35,12 +35,12 @@ export class PersonajeService {
 
                 .input('Edad',sql.VarChar, edad)
 
-            .query(`SELECT * from ${Personajes} where edad = @edad`);
+            .query(`SELECT * from ${Peliculas} where edad = @edad`);
 
         }else{
 
             const response = await pool.request()
-            .query(`SELECT * from ${Personajes}`);
+            .query(`SELECT * from ${Peliculas}`);
 
         }
 
@@ -49,7 +49,7 @@ export class PersonajeService {
 
     }
 
-    getPersonajeById = async (id) => {
+    getPeliculaById = async (id) => {
 
         console.log('This is a function on the service');
 
@@ -57,35 +57,34 @@ export class PersonajeService {
         const response = await pool.request()
         
             .input('id',sql.Int, id)
-            .query(`SELECT * from ${Personajes} where id = @id`);
+            .query(`SELECT * from ${Peliculas} where id = @id`);
 
         console.log(response)
 
         return response.recordset[0];
     }
     
-    createPersonaje = async (Personaje) => {
+    createPelicula = async (Pelicula) => {
 
         console.log('This is a function on the service');
-        console.log(Personaje)
+        console.log(Pelicula)
 
         const pool = await sql.connect(config);
         const response = await pool.request()
 
-            .input('Imagen',sql.VarChar, Personaje?.imagen ?? '')
-            .input('Nombre',sql.VarChar, Personaje?.nombre ?? '')
-            .input('Edad',sql.VarChar, Personaje?.edad ?? '')
-            .input('Peso',sql.VarChar, Personaje?.peso ?? '')
-            .input('Historia',sql.VarChar, Personaje?.historia ?? '')
-            .input('Peliculaoserieasociada',sql.VarChar, Personaje?.peliculaoserieasociada ?? '')
-            .query(`INSERT INTO ${Personajes}(Imagen, Nombre, Edad, Peso, Historia, Peliculaoserieasociada) VALUES (@Imagen, @Nombre, @Edad, @Peso, @Historia, @Peliculaoserieasociada)`);
+            .input('Imagen',sql.VarChar, Pelicula?.imagen ?? '')
+            .input('Titulo',sql.VarChar, Pelicula?.titulo ?? '')
+            .input('Fechadecreacion',sql.Date, Pelicula?.fechadecreacion ?? '')
+            .input('Calificacion',sql.Int, Pelicula?.calificacion ?? '')
+            .input('Personajesasociados',sql.VarChar, Pelicula?.personajesasociados ?? '')
+            .query(`INSERT INTO ${Pelicula}(Imagen, Titulo, Fechadecreacion, Calificacion, Personajesasociados) VALUES (@Imagen, @Titulo, @Fechadecreacion, @Calificacion, @Personajesasociados)`);
 
         console.log(response)
 
         return response.recordset;
     }
 
-    deletePersonajeById = async (id) => {
+    deletePeliculaById = async (id) => {
 
         console.log('This is a function on the service');
 
@@ -93,7 +92,7 @@ export class PersonajeService {
         const response = await pool.request()
 
             .input('id',sql.Int, id)
-            .query(`DELETE FROM ${Personajes} WHERE id = @id`);
+            .query(`DELETE FROM ${Peliculas} WHERE id = @id`);
             
         console.log(response)
 

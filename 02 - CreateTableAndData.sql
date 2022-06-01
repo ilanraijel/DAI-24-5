@@ -17,3 +17,13 @@ CREATE TABLE [dbo].[Personajes](
 	[Historia] [varchar](max) NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
+
+CREATE TABLE [dbo].[Peliculas](
+	[Id] [int] NULL,
+	[Imagen] [varchar](max) NULL,
+	[Titulo] [varchar](250) NULL,
+	[Fecha de creacion] [date] NULL,
+	[Calificacion] [int] NULL,
+	[Personajes asociados] [varchar](max) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO

@@ -6,5 +6,5 @@ export class Personaje {
     edad;
     peso;
     historia;
-
+    Personajesasociados;
 }

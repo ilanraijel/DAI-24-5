@@ -77,9 +77,29 @@ export class PersonajeService {
             .input('Edad',sql.VarChar, Personaje?.edad ?? '')
             .input('Peso',sql.VarChar, Personaje?.peso ?? '')
             .input('Historia',sql.VarChar, Personaje?.historia ?? '')
-            .input('Peliculaoserieasociada',sql.VarChar, Personaje?.peliculaoserieasociada ?? '')
-            .query(`INSERT INTO ${Personajes}(Imagen, Nombre, Edad, Peso, Historia, Peliculaoserieasociada) VALUES (@Imagen, @Nombre, @Edad, @Peso, @Historia, @Peliculaoserieasociada)`);
+            .input('PeliculaAsociada',sql.VarChar, Personaje?.peliculaAsociada ?? '')
+            .query(`INSERT INTO ${Personajes}(Imagen, Nombre, Edad, Peso, Historia, PeliculaAsociada) VALUES (@Imagen, @Nombre, @Edad, @Peso, @Historia, @PeliculaAsociada)`);
 
+        console.log(response)
+
+        return response.recordset;
+    }
+
+    updatePersonaje = async (id, Personaje) => {
+
+        console.log('This is a function on the service');
+        console.log(id, Personaje)
+
+        const pool = await sql.connect(config);
+        const response = await pool.request()
+
+            .input('Imagen',sql.VarChar, Personaje?.imagen ?? '')
+            .input('Nombre',sql.VarChar, Personaje?.nombre ?? '')
+            .input('Edad',sql.VarChar, Personaje?.edad ?? '')
+            .input('Peso',sql.VarChar, Personaje?.peso ?? '')
+            .input('Historia',sql.VarChar, Personaje?.historia ?? '')
+            .input('PeliculaAsociada',sql.VarChar, Personaje?.peliculaAsociada ?? '')
+            .query(`UPDATE TablaPersonaje SET Imagen = @Imagen, Nombre = @Nombre, Edad = @Edad, Peso = @Peso, Historia = @Historia, PeliculaAsociada = @PeliculaAsociada WHERE id = id`);
         console.log(response)
 
         return response.recordset;

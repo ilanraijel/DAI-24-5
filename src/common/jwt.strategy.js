@@ -1,4 +1,4 @@
-import { ExtractJwt, Strategy } from "passport-jwt/lib";
+import { ExtractJwt, Strategy } from "passport-jwt";
 
 const opt = {
     secretOrKey: process.env.AUTH_HS256_KEY,
@@ -6,6 +6,7 @@ const opt = {
     issuer: `${process.env.AUTH_ISSUER_URL}`,
     algorithms: ["HS256"],
 };
+
 const jwtStategy = new Strategy(opt, (jwt_payload, done) => {
     if (!jwt_payload) {
         done(true);
@@ -13,6 +14,7 @@ const jwtStategy = new Strategy(opt, (jwt_payload, done) => {
         done(null, jwt_payload);
     }
 });
+
 export const Authenticate = (req, res, next) => {
     passport.authenticate(jwtStategy, (err, user) => {
         console.log(user);

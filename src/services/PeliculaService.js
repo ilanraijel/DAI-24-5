@@ -6,36 +6,36 @@ const PeliculaTabla = process.env.DB_TABLA_PELICULAS;
 
 export class PeliculaService {
 
-    getPelicula = async (nombre, edad) => {
+    getPelicula = async (titulo, calificacion) => {
 
         console.log('This is a function on the service');
 
         const pool = await sql.connect(config);
 
-        if(nombre && edad){
+        if(titulo && calificacion){
 
             const response = await pool.request()
 
-                .input('Nombre',sql.VarChar, nombre)
-                .input('Edad',sql.VarChar, edad)
+                .input('Titulo',sql.VarChar, titulo)
+                .input('Calificacion',sql.VarChar, calificacion)
 
-            .query(`SELECT * from ${Peliculas} where nombre = @nombre and edad = @edad`);
+            .query(`SELECT * from ${Peliculas} where titulo = @titlulo and calificacion = @califcacion`);
 
-        }else if(nombre && !edad){
-
-            const response = await pool.request()
-
-                .input('Nombre',sql.VarChar, nombre)
-
-            .query(`SELECT * from ${Peliculas} where nombre = @nombre`);
-
-        }else if(!nombre && edad){
+        }else if(titulo && !calificacion){
 
             const response = await pool.request()
 
-                .input('Edad',sql.VarChar, edad)
+                .input('Titulo',sql.VarChar, titulo)
 
-            .query(`SELECT * from ${Peliculas} where edad = @edad`);
+            .query(`SELECT * from ${Peliculas} where titulo = @titulo`);
+
+        }else if(!titulo && calificacion){
+
+            const response = await pool.request()
+
+                .input('Calificacion',sql.VarChar, edad)
+
+            .query(`SELECT * from ${Peliculas} where calificacion = @calificacion`);
 
         }else{
 
@@ -76,8 +76,8 @@ export class PeliculaService {
             .input('Titulo',sql.VarChar, Pelicula?.titulo ?? '')
             .input('Fechadecreacion',sql.Date, Pelicula?.fechadecreacion ?? '')
             .input('Calificacion',sql.Int, Pelicula?.calificacion ?? '')
-            .input('Personajesasociados',sql.VarChar, Pelicula?.personajesasociados ?? '')
-            .query(`INSERT INTO ${Pelicula}(Imagen, Titulo, Fechadecreacion, Calificacion, Personajesasociados) VALUES (@Imagen, @Titulo, @Fechadecreacion, @Calificacion, @Personajesasociados)`);
+            .input('PersonajeAsociado',sql.Int, Pelicula?.personajeasociado ?? '')
+            .query(`INSERT INTO ${Pelicula}(Imagen, Titulo, Fechadecreacion, Calificacion, PersonajeAsociado) VALUES (@Imagen, @Titulo, @Fechadecreacion, @Calificacion, @PersonajeAsociado)`);
 
         console.log(response)
 

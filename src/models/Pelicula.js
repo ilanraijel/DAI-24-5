@@ -5,4 +5,5 @@ export class Pelicula{
     titulo;
     fechaCreacion;
     Calificacion;
+    pesonajeasociado;
 }

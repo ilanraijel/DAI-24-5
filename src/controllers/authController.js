@@ -7,8 +7,7 @@ const authService = new AuthService();
 router.get('/login', async (req, res) => {
   console.log(`This is a get operation`);
 
-  const token = await getSignedToken();
-    console.log(token);
+  const token = await authService.getToken();
   return res.status(200).json(token);
 });
 

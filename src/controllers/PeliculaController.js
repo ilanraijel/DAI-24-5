@@ -5,7 +5,7 @@ import { Authenticate } from '../common/jwt.strategy.js';
 const router = Router();
 const peliculaService = new PeliculaService();
 
-router.get('/', Authenticate, async (req, res) => {
+router.get('', Authenticate, async (req, res) => {
   console.log(`This is a get operation`);
 
   const {titulo, orden} = req.query;
@@ -23,7 +23,7 @@ router.get('/:id', Authenticate, async (req, res) => {
 
 });
 
-router.post('/', Authenticate, async (req, res) => {
+router.post('', Authenticate, async (req, res) => {
   console.log(`Request URL Param: ${req.params.id}`);
   console.log(`This is a post operation`);
 

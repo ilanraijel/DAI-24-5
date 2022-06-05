@@ -1,4 +1,6 @@
 import { ExtractJwt, Strategy } from "passport-jwt";
+import passport from "passport";
+import "dotenv/config";
 
 const opt = {
     secretOrKey: process.env.AUTH_HS256_KEY,

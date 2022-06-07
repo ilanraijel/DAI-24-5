@@ -19,7 +19,7 @@ export class PersonajeService {
                 .input('Nombre',sql.VarChar, nombre)
                 .input('Edad',sql.VarChar, edad)
 
-            .query(`SELECT * from ${Personajes} where nombre = @nombre and edad = @edad`);
+            .query(`SELECT * from ${PersonajeTabla} where nombre = @nombre and edad = @edad`);
 
         }else if(nombre && !edad){
 
@@ -27,7 +27,7 @@ export class PersonajeService {
 
                 .input('Nombre',sql.VarChar, nombre)
 
-            .query(`SELECT * from ${Personajes} where nombre = @nombre`);
+            .query(`SELECT * from ${PersonajeTabla} where nombre = @nombre`);
 
         }else if(!nombre && edad){
 
@@ -35,12 +35,12 @@ export class PersonajeService {
 
                 .input('Edad',sql.VarChar, edad)
 
-            .query(`SELECT * from ${Personajes} where edad = @edad`);
+            .query(`SELECT * from ${PersonajeTabla} where edad = @edad`);
 
         }else{
 
             const response = await pool.request()
-            .query(`SELECT * from ${Personajes}`);
+            .query(`SELECT * from ${PersonajeTabla}`);
 
         }
 
@@ -57,7 +57,7 @@ export class PersonajeService {
         const response = await pool.request()
         
             .input('id',sql.Int, id)
-            .query(`SELECT * from ${Personajes} where id = @id`);
+            .query(`SELECT * from ${PersonajeTabla} where id = @id`);
 
         console.log(response)
 
@@ -78,7 +78,7 @@ export class PersonajeService {
             .input('Peso',sql.VarChar, Personaje?.peso ?? '')
             .input('Historia',sql.VarChar, Personaje?.historia ?? '')
             .input('PeliculaAsociada',sql.VarChar, Personaje?.peliculaAsociada ?? '')
-            .query(`INSERT INTO ${Personajes}(Imagen, Nombre, Edad, Peso, Historia, PeliculaAsociada) VALUES (@Imagen, @Nombre, @Edad, @Peso, @Historia, @PeliculaAsociada)`);
+            .query(`INSERT INTO ${PersonajeTabla}(Imagen, Nombre, Edad, Peso, Historia, PeliculaAsociada) VALUES (@Imagen, @Nombre, @Edad, @Peso, @Historia, @PeliculaAsociada)`);
 
         console.log(response)
 
@@ -113,7 +113,7 @@ export class PersonajeService {
         const response = await pool.request()
 
             .input('id',sql.Int, id)
-            .query(`DELETE FROM ${Personajes} WHERE id = @id`);
+            .query(`DELETE FROM ${PersonajeTabla} WHERE id = @id`);
             
         console.log(response)
 

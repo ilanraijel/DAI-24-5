@@ -19,7 +19,7 @@ export class PeliculaService {
                 .input('Titulo',sql.VarChar, titulo)
                 .input('Calificacion',sql.VarChar, calificacion)
 
-            .query(`SELECT * from ${Peliculas} where titulo = @titlulo and calificacion = @califcacion`);
+            .query(`SELECT * from ${PeliculaTabla} where titulo = @titlulo and calificacion = @califcacion`);
 
         }else if(titulo && !calificacion){
 
@@ -27,7 +27,7 @@ export class PeliculaService {
 
                 .input('Titulo',sql.VarChar, titulo)
 
-            .query(`SELECT * from ${Peliculas} where titulo = @titulo`);
+            .query(`SELECT * from ${PeliculaTabla} where titulo = @titulo`);
 
         }else if(!titulo && calificacion){
 
@@ -35,12 +35,12 @@ export class PeliculaService {
 
                 .input('Calificacion',sql.VarChar, edad)
 
-            .query(`SELECT * from ${Peliculas} where calificacion = @calificacion`);
+            .query(`SELECT * from ${PeliculaTabla} where calificacion = @calificacion`);
 
         }else{
 
             const response = await pool.request()
-            .query(`SELECT * from ${Peliculas}`);
+            .query(`SELECT * from ${PeliculaTabla}`);
 
         }
 
@@ -57,7 +57,12 @@ export class PeliculaService {
         const response = await pool.request()
         
             .input('id',sql.Int, id)
-            .query(`SELECT * from ${Peliculas} where id = @id`);
+            .input('Imagen',sql.VarChar, Pelicula?.imagen ?? '')
+            .input('Titulo',sql.VarChar, Pelicula?.titulo ?? '')
+            .input('Fechadecreacion',sql.Date, Pelicula?.fechadecreacion ?? '')
+            .input('Calificacion',sql.Int, Pelicula?.calificacion ?? '')
+            .input('PersonajeAsociado',sql.Int, Pelicula?.personajeasociado ?? '')
+            .query(`SELECT * from ${PeliculaTabla} where id = @id`);
 
         console.log(response)
 
@@ -77,7 +82,7 @@ export class PeliculaService {
             .input('Fechadecreacion',sql.Date, Pelicula?.fechadecreacion ?? '')
             .input('Calificacion',sql.Int, Pelicula?.calificacion ?? '')
             .input('PersonajeAsociado',sql.Int, Pelicula?.personajeasociado ?? '')
-            .query(`INSERT INTO ${Pelicula}(Imagen, Titulo, Fechadecreacion, Calificacion, PersonajeAsociado) VALUES (@Imagen, @Titulo, @Fechadecreacion, @Calificacion, @PersonajeAsociado)`);
+            .query(`INSERT INTO ${PeliculaTabla}(Imagen, Titulo, Fechadecreacion, Calificacion, PersonajeAsociado) VALUES (@Imagen, @Titulo, @Fechadecreacion, @Calificacion, @PersonajeAsociado)`);
 
         console.log(response)
 

@@ -11,10 +11,11 @@ export class PeliculaService {
         console.log('This is a function on the service');
 
         const pool = await sql.connect(config);
+        let response = 0
 
         if(titulo && calificacion){
 
-            const response = await pool.request()
+             response = await pool.request()
 
                 .input('Titulo',sql.VarChar, titulo)
                 .input('Calificacion',sql.VarChar, calificacion)
@@ -23,7 +24,7 @@ export class PeliculaService {
 
         }else if(titulo && !calificacion){
 
-            const response = await pool.request()
+             response = await pool.request()
 
                 .input('Titulo',sql.VarChar, titulo)
 
@@ -31,7 +32,7 @@ export class PeliculaService {
 
         }else if(!titulo && calificacion){
 
-            const response = await pool.request()
+             response = await pool.request()
 
                 .input('Calificacion',sql.VarChar, edad)
 
@@ -39,7 +40,7 @@ export class PeliculaService {
 
         }else{
 
-            const response = await pool.request()
+             response = await pool.request()
             .query(`SELECT * from ${PeliculaTabla}`);
 
         }

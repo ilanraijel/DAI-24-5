@@ -59,9 +59,9 @@ export class PeliculaService {
             .input('id',sql.Int, id)
             .input('Imagen',sql.VarChar, Pelicula?.imagen ?? '')
             .input('Titulo',sql.VarChar, Pelicula?.titulo ?? '')
-            .input('Fechadecreacion',sql.Date, Pelicula?.fechadecreacion ?? '')
+            .input('Fechadecreacion',sql.VarChar, Pelicula?.fechadecreacion ?? '')
             .input('Calificacion',sql.Int, Pelicula?.calificacion ?? '')
-            .input('PersonajeAsociado',sql.Int, Pelicula?.personajeasociado ?? '')
+            .input('PersonajesAsociados',sql.Int, Pelicula?.personajeasociado ?? '')
             .query(`SELECT * from ${PeliculaTabla} where id = @id`);
 
         console.log(response)
@@ -79,10 +79,10 @@ export class PeliculaService {
 
             .input('Imagen',sql.VarChar, Pelicula?.imagen ?? '')
             .input('Titulo',sql.VarChar, Pelicula?.titulo ?? '')
-            .input('Fechadecreacion',sql.Date, Pelicula?.fechadecreacion ?? '')
+            .input('Fechadecreacion',sql.VarChar, Pelicula?.fechadecreacion ?? '')
             .input('Calificacion',sql.Int, Pelicula?.calificacion ?? '')
-            .input('PersonajeAsociado',sql.Int, Pelicula?.personajeasociado ?? '')
-            .query(`INSERT INTO ${PeliculaTabla}(Imagen, Titulo, Fechadecreacion, Calificacion, PersonajeAsociado) VALUES (@Imagen, @Titulo, @Fechadecreacion, @Calificacion, @PersonajeAsociado)`);
+            .input('PersonajesAsociados',sql.Int, Pelicula?.personajeasociado ?? '')
+            .query(`INSERT INTO ${PeliculaTabla}(Imagen, Titulo, Fechadecreacion, Calificacion, PersonajesAsociados) VALUES (@Imagen, @Titulo, @Fechadecreacion, @Calificacion, @PersonajesAsociados)`);
 
         console.log(response)
 
